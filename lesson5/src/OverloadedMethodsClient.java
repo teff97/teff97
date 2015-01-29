@@ -5,16 +5,14 @@ public class OverloadedMethodsClient {
 		int[] integerValues = {100, 34, 290, 4, 6, 6, 34, 100, 34};
 		double[] doubleValues = {0.1, 3.4, 29.0, 0.4, 0.1, 6.6, 3.4, 0.1, 0.1};
 
-		Matrix intMatrix = new Matrix(integerValues);
-		Matrix doubleMatrix = new Matrix(doubleValues);
-		
-		System.out.println(intMatrix.Mean);
-		System.out.println(intMatrix.Median);
-		System.out.println(intMatrix.Mode);
-		System.out.println(doubleMatrix.Mean);
-		System.out.println(doubleMatrix.Median);
-		System.out.println(doubleMatrix.Mode);
+		System.out.println("Integer mean: " + Mean(integerValues));
+		System.out.println("Double mean: " + Mean(doubleValues));
+		//System.out.println("Integer median: " + Median(integerValues));
+		System.out.println("Double median: " + Median(doubleValues));
+		//System.out.println("Integer mode: " + Mode(integerValues));
+		System.out.println("Double mode: " + Mode(doubleValues));
 	}
+
 	
 	public static int[] Copy(int[] values){
 		if(values == null){
