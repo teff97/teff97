@@ -96,8 +96,53 @@ public class OverloadedMethodsClient {
 	}
 	
 	// TODO: overload mean so it works with an array of doubles
+	public static double Mean(double[] values){
+		// don't want to change original array, so make a copy before sorting
+				double[] copy = Copy(values);
+				Sort(copy);
+				
+				int sum = 0;
+				for(int position = 0; position < copy.length; position++) {
+					sum += copy[position];
+				}
+				
+				double mean = (double) sum / (double) copy.length;
+				
+				return mean;
+	}
 	
 	// TODO: overload median and mode so that it works with an array of doubles
+	public static double Median(double[] values){
+		double[] copy = Copy(values);
+		Sort(copy);
+		
+		if(copy.length % 2 == 1){
+			return copy[( (int) (copy.length/2)+1)];
+		}else{
+			return (copy[(copy.length / 2)] + copy[((copy.length / 2)+1)])/2;
+		}
+	}
+	
+	public static double Mode(double[] values){
+		double[] copy = Copy(values);
+		Sort(copy);
+		int original = 0;
+		
+		for(int idx = 0; idx < copy.length; idx++){
+			int counter = 0;
+			for(int idx2 = 0; idx2 < copy.length; idx2++){
+				if(copy[idx] == copy[idx2]){
+					counter ++;
+				}
+			}
+			
+			if( counter > original){
+				original = idx;
+			}
+		}
+		
+		return copy[original];
+	}
 
 
 }
