@@ -17,11 +17,11 @@ public class Equation {
 		if(operation == '+'){
 			return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave + cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
 		}else if(operation == '-'){
-			return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave + cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
+			return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave - cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
 		}else if(operation == '*'){
-			return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave + cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
+			return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave * cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
 		}else if(operation == '/'){
-			return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave + cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
+			return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave / cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
 		}else{
 			return 0.0;
 		}

@@ -11,6 +11,11 @@ public class Cell {
 	//1 is date, 2 is String of words, 3 is integer number, 
 	//5 is decimal number, 6 is a double that is too big(use integerNumPrint)
 	
+	public Cell(Equation e){
+		equation = e;
+		typeInCell = 5;
+	}
+	
 	public Cell(Date d){
 		date.year = d.year;
 		date.day = d.day;

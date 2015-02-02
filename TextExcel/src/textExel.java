@@ -36,8 +36,15 @@ public class textExel {
 			sortAscending(input);
 		}else if(ifSortd(input)){
 			sortDescending(input);
+		}else if(ifEquation(input)){
+			Equation(input);
+			
 		}else{
+			try{
 			parseInput(input);
+			}catch(ArrayIndexOutOfBoundsException e){
+				System.out.println("Wrong input");
+			}
 		}
 		
 		}while(!input.equalsIgnoreCase("quit"));
@@ -51,25 +58,27 @@ public class textExel {
 	//6 is a double that is too big(use integerNumPrint)
 	public static void parseInput(String input){
 		String inputArray[] = input.split(" ");
-		parseLocation(inputArray[0]);
-		
-		//if statements determine if is a date double int or string
-		//inputArray[2] should be the thing that they are storing
-		if(inputArray.length == 3 && isDate(inputArray[2])) {
-			Date date = new Date(inputArray[2]);
-			cells[inputLocation[0]][inputLocation[1]] = new Cell(date);
-		}else if(inputArray.length == 3 && isDouble(inputArray[2]) == true){
-			cells[inputLocation[0]][inputLocation[1]] = new Cell(Double.parseDouble(inputArray[2]));
-		}else if(inputArray.length >= 3 && isStringStart(inputArray[2]) && isStringEnd(inputArray[inputArray.length-1])){
-			String passString = "";
-			for(int idx = 2;idx < inputArray.length; idx++){
-				passString = passString + inputArray[idx];
+		if(inputArray.length != 1){
+			parseLocation(inputArray[0]);
+	
+			//if statements determine if is a date double int or string
+			//inputArray[2] should be the thing that they are storing
+			if(inputArray.length == 3 && isDate(inputArray[2])) {
+				Date date = new Date(inputArray[2]);
+				cells[inputLocation[0]][inputLocation[1]] = new Cell(date);
+			}else if(inputArray.length == 3 && isDouble(inputArray[2]) == true){
+				cells[inputLocation[0]][inputLocation[1]] = new Cell(Double.parseDouble(inputArray[2]));
+			}else if(inputArray.length >= 3 && isStringStart(inputArray[2]) && isStringEnd(inputArray[inputArray.length-1])){
+				String passString = "";
+				for(int idx = 2;idx < inputArray.length; idx++){
+					passString = passString + inputArray[idx];
+				}
+				cells[inputLocation[0]][inputLocation[1]] = new Cell(passString);
+			}else if(inputArray.length == 5 && !(isStringStart(inputArray[2]) && isStringEnd(inputArray[inputArray.length-1]))){
+				cells[inputLocation[0]][inputLocation[1]] = new Cell(input, 3);
+			}else{
+				cells[inputLocation[0]][inputLocation[1]] = new Cell("ERROR");
 			}
-			cells[inputLocation[0]][inputLocation[1]] = new Cell(passString);
-		}else if(inputArray.length == 5 && !(isStringStart(inputArray[2]) && isStringEnd(inputArray[inputArray.length-1]))){
-			cells[inputLocation[0]][inputLocation[1]] = new Cell(input, 3);
-		}else{
-			cells[inputLocation[0]][inputLocation[1]] = new Cell("ERROR");
 		}
 	}
 	
@@ -200,8 +209,14 @@ public class textExel {
 	}
 	
 	public static void parseLocation(String input){
+		try{
 		inputLocation[0] = (int) (input.charAt(0)-65);
 		inputLocation[1] = Integer.parseInt(input.substring(1))-1;
+		}catch(NumberFormatException e){
+			System.out.println("ERROR");
+			//String []args = {};
+			//textExel.main(args);
+		}
 	}
 	
 	public static boolean ifClear(String input){
@@ -525,6 +540,42 @@ public class textExel {
 					sortArrayLocation++;
 				}
 			}
+	}
+	
+	public static boolean ifEquation(String input){
+		String inputArray[] = input.split(" ");
+		if(inputArray.length < 5){
+			//System.out.println("false1");
+			return false;
+		}
+	
+		//System.out.println("true");
+		return true;
+	}
+	
+	public static void Equation(String input){
+		String inputArray[] = input.split(" ");
+		if(inputArray[2].charAt(0) < 47 && inputArray[2].charAt(0) > 58 && inputArray[4].charAt(0) < 47 && inputArray[4].charAt(0) > 58){
+			Equation e = new Equation(input);
+			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumSave = e.evaluate(cells);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint = e.evaluate(cells);
+			//System.out.println(cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint);
+		}else if(inputArray[2].charAt(0) > 47 && inputArray[2].charAt(0) < 58 && inputArray[4].charAt(0) > 47 && inputArray[4].charAt(0) < 58){
+			parseLocation(inputArray[0]);
+			char operation = inputArray[3].charAt(0);
+			double ans = 0.0;
+			if(operation == '+'){
+				ans = Double.parseDouble(inputArray[2]) + Double.parseDouble(inputArray[4]);
+			}else if(operation == '-'){
+				ans = Double.parseDouble(inputArray[2]) - Double.parseDouble(inputArray[4]);
+			}else if(operation == '*'){
+				ans = Double.parseDouble(inputArray[2]) * Double.parseDouble(inputArray[4]);
+			}else if(operation == '/'){
+				ans = Double.parseDouble(inputArray[2]) / Double.parseDouble(inputArray[4]);
+			}
+			cells [inputLocation[0]][inputLocation[1]] = new Cell(ans);
+		}
 	}
 	
 }
