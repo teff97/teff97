@@ -38,7 +38,8 @@ public class textExel {
 			sortDescending(input);
 		}else if(ifEquation(input)){
 			Equation(input);
-			
+		}else if(ifEquationPrint(input)){
+			EquationPrint(input);
 		}else{
 			try{
 			parseInput(input);
@@ -154,6 +155,7 @@ public class textExel {
 	//1 is date, 2 is String of words, 3 is integer number, 
 	//5 is decimal number, 6 is a double that is too big(use integerNumPrint)
 	public static void printArray(){
+		solveEquations();
 		printLine();
 		setColums();
 		printLine();
@@ -214,8 +216,6 @@ public class textExel {
 		inputLocation[1] = Integer.parseInt(input.substring(1))-1;
 		}catch(NumberFormatException e){
 			System.out.println("ERROR");
-			//String []args = {};
-			//textExel.main(args);
 		}
 	}
 	
@@ -320,6 +320,15 @@ public class textExel {
 			}
 			p.println("-");
 		}
+		
+		
+		for(int col = 0; col < numOfColumns; col++){
+			for(int row = 0; row < numOfRows; row++){
+				if(cells[col][row]!= null && cells[col][row].equation != null){
+					p.println((char) (col+65) + row + " = " + cells[col][row].equation);
+				}
+			}
+		}
 		p.close();
 	}
 	
@@ -339,7 +348,7 @@ public class textExel {
 		try{
 			input = new Scanner(f);
 		}catch(FileNotFoundException e){
-			System.out.println("ERROR");
+			System.out.println("File Not Found");
 			return;
 		}
 		int rowCounter = 0;
@@ -347,7 +356,7 @@ public class textExel {
 			String importedLine = input.nextLine();
 			int lineCounter = 0;
 			String newInput;
-			if(!importedLine.substring(0, 12).equals("------------")  && !importedLine.substring(0, 12).equals("|          |")){
+			if(!importedLine.substring(0, 12).equals("------------")  && !importedLine.substring(0, 12).equals("|          |") && !ifEquation(importedLine)){
 				for(int idx = 0; idx < importedLine.length();idx++){
 					if(importedLine.charAt(idx) == '|'){
 						lineCounter++;
@@ -367,6 +376,8 @@ public class textExel {
 					}
 				}
 				rowCounter++;
+			}else if(ifEquation(importedLine)){
+				Equation(importedLine);
 			}
 		}
 		
@@ -555,13 +566,13 @@ public class textExel {
 	
 	public static void Equation(String input){
 		String inputArray[] = input.split(" ");
-		if(inputArray[2].charAt(0) < 47 && inputArray[2].charAt(0) > 58 && inputArray[4].charAt(0) < 47 && inputArray[4].charAt(0) > 58){
+		if(isLocation(inputArray[2]) && isLocation(inputArray[4])){
 			Equation e = new Equation(input);
 			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
 			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumSave = e.evaluate(cells);
 			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint = e.evaluate(cells);
 			//System.out.println(cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint);
-		}else if(inputArray[2].charAt(0) > 47 && inputArray[2].charAt(0) < 58 && inputArray[4].charAt(0) > 47 && inputArray[4].charAt(0) < 58){
+		}else if(!isLocation(inputArray[2]) && !isLocation(inputArray[4])){
 			parseLocation(inputArray[0]);
 			char operation = inputArray[3].charAt(0);
 			double ans = 0.0;
@@ -575,7 +586,106 @@ public class textExel {
 				ans = Double.parseDouble(inputArray[2]) / Double.parseDouble(inputArray[4]);
 			}
 			cells [inputLocation[0]][inputLocation[1]] = new Cell(ans);
+		}else if(isLocation(inputArray[2]) && !isLocation(inputArray[4])){
+			Equation e = new Equation(inputArray[0], inputArray[2], inputArray[3].charAt(0), Integer.parseInt(inputArray[4]));
+			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumSave = e.evaluate(cells);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint = e.evaluate(cells);
+		}else if(!isLocation(inputArray[2]) && isLocation(inputArray[4])){
+			Equation e = new Equation(inputArray[0], inputArray[4], inputArray[3].charAt(0), Integer.parseInt(inputArray[2]));
+			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumSave = e.evaluate(cells);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint = e.evaluate(cells);
 		}
 	}
 	
+	public static boolean isLocation(String input){
+		if(input.charAt(0) > 64  &&  input.charAt(0) < 91){
+			if(input.charAt(1) > 47  &&  input.charAt(1) < 58){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean ifEquationPrint(String input){
+		if(input.length() == 2){
+			return isLocation(input);
+		}else{
+			return false;
+		}
+	}
+	
+	public static void EquationPrint(String input){
+		parseLocation(input);
+		if(cells[inputLocation[0]][inputLocation[1]].isEquation){
+			System.out.println(cells[inputLocation[0]][inputLocation[1]].equation);
+		}else{
+			if(cells[inputLocation[0]][inputLocation[1]] != null && (cells[inputLocation[0]][inputLocation[1]].typeInCell == 1 || cells[inputLocation[0]][inputLocation[1]].typeInCell == 2 || cells[inputLocation[0]][inputLocation[1]].typeInCell == 3 || cells[inputLocation[0]][inputLocation[1]].typeInCell == 5)){
+				if(cells[inputLocation[0]][inputLocation[1]].typeInCell == 1){
+					String print = cells[inputLocation[0]][inputLocation[1]].date.toStringWithSlash();
+					
+					System.out.println(print);
+				}else if(cells[inputLocation[0]][inputLocation[1]].typeInCell == 2){
+					String print = cells[inputLocation[0]][inputLocation[1]].wordPrint;
+					System.out.println(print);
+				}else if(cells[inputLocation[0]][inputLocation[1]].typeInCell == 5){
+					String print = "" + cells[inputLocation[0]][inputLocation[1]].doubleNumPrint;
+					System.out.print(print);
+				}else{
+					System.out.print("There is no value in the cell");
+				}
+			}else{
+				System.out.print("There is no value in the cell");
+			}
+		}
+	}
+	
+	public static void solveEquations(){
+		Cell cellformula[][] = new Cell[numOfColumns][numOfRows];
+	
+		//loop through the cells array and store only equations in cell formula
+		for(int col = 0; col < numOfColumns; col++){
+			for(int row = 0; row < numOfRows; row++){
+				if(cells[col][row]!= null && cells[col][row].equation != null){
+					try{
+						cellformula[col][row].equation = cells[col][row].equation;
+					}catch(java.lang.NullPointerException e){
+						
+					}
+				}
+			}
+		}
+		
+		//set up loop that goes through the cell formula solves the formula and stores that value...
+		//then loop through that until doublePrint does not change
+		int count = 0;
+		while(count != (numOfColumns * numOfRows)){
+			for(int col = 0; col < numOfColumns; col++){
+				for(int row = 0; row < numOfRows; row++){
+					if(cells[col][row]!= null && cells[col][row].equation != null){
+						try{
+							cellformula[col][row].doubleNumPrint = cellformula[col][row].equation.evaluate(cellformula);
+						}catch(java.lang.NullPointerException e){
+							
+						}
+					}
+				}
+			}
+			count++;
+		}
+		
+		for(int col = 0; col < numOfColumns; col++){
+			for(int row = 0; row < numOfRows; row++){
+				if(cells[col][row]!= null && cells[col][row].equation != null){
+					try{
+						cells[col][row].doubleNumPrint = cellformula[col][row].doubleNumPrint;
+					}catch(java.lang.NullPointerException e){
+						
+					}
+				}
+			}
+		}
+	}
+
 }

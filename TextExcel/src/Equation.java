@@ -4,6 +4,7 @@ public class Equation {
 	int locationVarOne[] = new int[2];
 	int locationVarTwo[] = new int[2];
 	Character operation;
+	int numberOne;
 
 	public Equation (String input){
 		String parseInput[] = input.split(" ");
@@ -13,17 +14,39 @@ public class Equation {
 		locationVarTwo = parseLocation(parseInput[4]);	
 	}
 	
+	public Equation(String StoreLocation, String location, char operator, int num){
+		storeLocation = parseLocation(StoreLocation);
+		locationVarOne = parseLocation(location);
+		locationVarTwo = null;
+		operation = operator;
+		numberOne = num;
+	}
+	
 	public double evaluate(Cell[][] cells){
-		if(operation == '+'){
-			return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave + cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
-		}else if(operation == '-'){
-			return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave - cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
-		}else if(operation == '*'){
-			return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave * cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
-		}else if(operation == '/'){
-			return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave / cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
+		if(locationVarTwo != null){//need to denote that both inputs are addresses 
+			if(operation == '+'){
+				return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave + cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
+			}else if(operation == '-'){
+				return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave - cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
+			}else if(operation == '*'){
+				return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave * cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
+			}else if(operation == '/'){
+				return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave / cells[locationVarTwo[0]][locationVarTwo[1]].doubleNumSave;
+			}else{
+				return 0.0;
+			}
 		}else{
-			return 0.0;
+			if(operation == '+'){
+				return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave + numberOne;
+			}else if(operation == '-'){
+				return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave - numberOne;
+			}else if(operation == '*'){
+				return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave * numberOne;
+			}else if(operation == '/'){
+				return cells[locationVarOne[0]][locationVarOne[1]].doubleNumSave / numberOne;
+			}else{
+				return 0.0;
+			}
 		}
 	}
 	
@@ -34,4 +57,15 @@ public class Equation {
 		inputLocation[1] = Integer.parseInt(location.substring(1))-1;
 		return inputLocation;
 	}
+	
+	public static String parseLocation (int []inputLocation){
+		char inputLetter = (char) (inputLocation[0] + 65);
+		return inputLetter + "" + (inputLocation[1] + 1) + "";
+	}
+	
+	public String toString(){
+		return parseLocation(locationVarOne) + " " + operation + " " + parseLocation(locationVarTwo);
+	}
+	
+	
 }

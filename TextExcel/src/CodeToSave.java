@@ -1,6 +1,29 @@
 
 public class CodeToSave {
+
 	/*
+	 * if(inputArray[2].charAt(0) < 47 && inputArray[2].charAt(0) > 58 && inputArray[4].charAt(0) < 47 && inputArray[4].charAt(0) > 58){
+			Equation e = new Equation(input);
+			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumSave = e.evaluate(cells);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint = e.evaluate(cells);
+			//System.out.println(cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint);
+		}else if(inputArray[2].charAt(0) > 47 && inputArray[2].charAt(0) < 58 && inputArray[4].charAt(0) > 47 && inputArray[4].charAt(0) < 58){
+			parseLocation(inputArray[0]);
+			char operation = inputArray[3].charAt(0);
+			double ans = 0.0;
+			if(operation == '+'){
+				ans = Double.parseDouble(inputArray[2]) + Double.parseDouble(inputArray[4]);
+			}else if(operation == '-'){
+				ans = Double.parseDouble(inputArray[2]) - Double.parseDouble(inputArray[4]);
+			}else if(operation == '*'){
+				ans = Double.parseDouble(inputArray[2]) * Double.parseDouble(inputArray[4]);
+			}else if(operation == '/'){
+				ans = Double.parseDouble(inputArray[2]) / Double.parseDouble(inputArray[4]);
+			}
+			cells [inputLocation[0]][inputLocation[1]] = new Cell(ans);
+		}
+		
 	 * public static void sortDescending(String input){
 		String inputArray[] = input.split(" ");
 		//input should be sorta A1 to A5
