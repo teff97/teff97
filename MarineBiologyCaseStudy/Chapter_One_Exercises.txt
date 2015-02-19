@@ -1,0 +1,54 @@
+Chapter One Exercises
+Exercise Set 1:
+1. Complete (yes/no)?
+2. 
+
+Analysis Question Set 1:
+1.
+2.
+3.
+4.
+
+Exercise Set 2:
+1.	Timestep	Fish's location		Fish's Direction	Did it move?	In what direction?	New location	New direction
+	1
+	2
+	3
+	4
+	5
+
+
+2.
+
+Analysis Question Set 2:
+1.
+2.	Timestep	Fish's location		Fish's Direction	Did it move?	In what direction?	New location	New direction
+	1
+	2
+	3
+	4
+	5
+	6
+	7
+	8
+	9
+	10
+	11
+	12
+	13
+	14
+	15
+	16
+	17
+	18
+	19
+	20
+
+Analysis Question Set 3:
+1.
+
+Exercise Set 3:
+1.
+2.
+
+UOPLOAD THE DATA FILE THAT YOU MAKE FOR THE LAST PROBLEM TO YOUR GIT REPOSITORY.
