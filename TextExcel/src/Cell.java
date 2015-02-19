@@ -27,8 +27,8 @@ public class Cell {
 	
 	public Cell(String s){
 		wordSave = s;
-		if(s.length() > 11){
-			wordPrint = s.substring(0, 11);
+		if(s.length() > 10){
+			wordPrint = s.substring(1, 11);
 		}else{
 			wordPrint = s;
 		}

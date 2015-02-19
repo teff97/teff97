@@ -36,6 +36,10 @@ public class textExel {
 			sortAscending(input);
 		}else if(ifSortd(input)){
 			sortDescending(input);
+		}else if(ifSUM(input)){
+			SUM(input);
+		}else if(ifAVG(input)){
+			AVG(input);
 		}else if(ifEquation(input)){
 			Equation(input);
 		}else if(ifEquationPrint(input)){
@@ -565,38 +569,8 @@ public class textExel {
 	}
 	
 	public static void Equation(String input){
-		String inputArray[] = input.split(" ");
-		if(isLocation(inputArray[2]) && isLocation(inputArray[4])){
 			Equation e = new Equation(input);
 			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
-			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumSave = e.evaluate(cells);
-			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint = e.evaluate(cells);
-			//System.out.println(cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint);
-		}else if(!isLocation(inputArray[2]) && !isLocation(inputArray[4])){
-			parseLocation(inputArray[0]);
-			char operation = inputArray[3].charAt(0);
-			double ans = 0.0;
-			if(operation == '+'){
-				ans = Double.parseDouble(inputArray[2]) + Double.parseDouble(inputArray[4]);
-			}else if(operation == '-'){
-				ans = Double.parseDouble(inputArray[2]) - Double.parseDouble(inputArray[4]);
-			}else if(operation == '*'){
-				ans = Double.parseDouble(inputArray[2]) * Double.parseDouble(inputArray[4]);
-			}else if(operation == '/'){
-				ans = Double.parseDouble(inputArray[2]) / Double.parseDouble(inputArray[4]);
-			}
-			cells [inputLocation[0]][inputLocation[1]] = new Cell(ans);
-		}else if(isLocation(inputArray[2]) && !isLocation(inputArray[4])){
-			Equation e = new Equation(inputArray[0], inputArray[2], inputArray[3].charAt(0), Integer.parseInt(inputArray[4]));
-			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
-			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumSave = e.evaluate(cells);
-			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint = e.evaluate(cells);
-		}else if(!isLocation(inputArray[2]) && isLocation(inputArray[4])){
-			Equation e = new Equation(inputArray[0], inputArray[4], inputArray[3].charAt(0), Integer.parseInt(inputArray[2]));
-			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
-			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumSave = e.evaluate(cells);
-			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint = e.evaluate(cells);
-		}
 	}
 	
 	public static boolean isLocation(String input){
@@ -619,7 +593,7 @@ public class textExel {
 	public static void EquationPrint(String input){
 		parseLocation(input);
 		if(cells[inputLocation[0]][inputLocation[1]].isEquation){
-			System.out.println(cells[inputLocation[0]][inputLocation[1]].equation);
+			System.out.println(cells[inputLocation[0]][inputLocation[1]].equation.toString());
 		}else{
 			if(cells[inputLocation[0]][inputLocation[1]] != null && (cells[inputLocation[0]][inputLocation[1]].typeInCell == 1 || cells[inputLocation[0]][inputLocation[1]].typeInCell == 2 || cells[inputLocation[0]][inputLocation[1]].typeInCell == 3 || cells[inputLocation[0]][inputLocation[1]].typeInCell == 5)){
 				if(cells[inputLocation[0]][inputLocation[1]].typeInCell == 1){
@@ -627,10 +601,10 @@ public class textExel {
 					
 					System.out.println(print);
 				}else if(cells[inputLocation[0]][inputLocation[1]].typeInCell == 2){
-					String print = cells[inputLocation[0]][inputLocation[1]].wordPrint;
+					String print = cells[inputLocation[0]][inputLocation[1]].wordSave;
 					System.out.println(print);
 				}else if(cells[inputLocation[0]][inputLocation[1]].typeInCell == 5){
-					String print = "" + cells[inputLocation[0]][inputLocation[1]].doubleNumPrint;
+					String print = "" + cells[inputLocation[0]][inputLocation[1]].doubleNumSave;
 					System.out.print(print);
 				}else{
 					System.out.print("There is no value in the cell");
@@ -643,10 +617,10 @@ public class textExel {
 	
 	public static void solveEquations(){
 		Cell cellformula[][] = new Cell[numOfColumns][numOfRows];
-	
 		//loop through the cells array and store only equations in cell formula
 		for(int col = 0; col < numOfColumns; col++){
 			for(int row = 0; row < numOfRows; row++){
+				cellformula[col][row] = new Cell(0.0);
 				if(cells[col][row]!= null && cells[col][row].equation != null){
 					try{
 						cellformula[col][row].equation = cells[col][row].equation;
@@ -659,13 +633,14 @@ public class textExel {
 		
 		//set up loop that goes through the cell formula solves the formula and stores that value...
 		//then loop through that until doublePrint does not change
+		
 		int count = 0;
 		while(count != (numOfColumns * numOfRows)){
 			for(int col = 0; col < numOfColumns; col++){
 				for(int row = 0; row < numOfRows; row++){
 					if(cells[col][row]!= null && cells[col][row].equation != null){
 						try{
-							cellformula[col][row].doubleNumPrint = cellformula[col][row].equation.evaluate(cellformula);
+							cellformula[col][row].doubleNumPrint = cellformula[col][row].equation.evaluate(cells);
 						}catch(java.lang.NullPointerException e){
 							
 						}
@@ -687,5 +662,104 @@ public class textExel {
 			}
 		}
 	}
+	
+	public static void SUM(String input){
+		
+		//devil line...
 
+		//parse location
+		parseLocation(input.substring(0, 2));
+		
+			//loop trough to great string equation
+			int start[] = Equation.parseLocation(input.substring(9, 11));
+			int end[] = Equation.parseLocation(input.substring(14, 16));
+			String s = "";
+			for(int col = start[0]; col <= end[0]; col ++){
+				for(int row = start[1]; row <= end[1]; row ++){
+					if(col == end[0] && row == end[1]){
+						s = s + "" + cells[col][row].doubleNumPrint + "";
+					}else{
+						s = s + "" + cells[col][row].doubleNumPrint + " + ";
+					}
+					System.out.println(s);
+				}
+			}
+			
+			//add location
+			s = input.substring(0, 5) + s;
+			
+			//put it in the correct cell
+			Equation e = new Equation(s);
+			cells[inputLocation[0]][inputLocation[1]] = new Cell(e);
+			return;
+				
+	}
+	
+	public static boolean ifSUM(String input){
+		if(input.length() == 16 && isLocation(input.substring(0,2)) && isLocation(input.substring(9, 11)) && isLocation(input.substring(14, 16))){
+			if(input.substring(5, 8).equals("SUM")){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public static boolean ifAVG(String input){
+		if(input.length() == 16 && isLocation(input.substring(0,2)) && isLocation(input.substring(9, 11)) && isLocation(input.substring(14, 16))){
+			if(input.substring(5, 8).equals("AVG")){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public static void AVG(String input){
+				//parse location
+				parseLocation(input.substring(0, 2));
+				
+					//loop trough to great string equation
+					int start[] = Equation.parseLocation(input.substring(9, 11));
+					int end[] = Equation.parseLocation(input.substring(14, 16));
+					String s = "";
+					int numberOfValues = 0;
+					for(int col = start[0]; col <= end[0]; col ++){
+						for(int row = start[1]; row <= end[1]; row ++){
+							if(col == end[0] && row == end[1]){
+								s = s + "" + cells[col][row].doubleNumPrint + "";
+							}else{
+								s = s + "" + cells[col][row].doubleNumPrint + " + ";
+							}
+							numberOfValues++;
+						}
+					}
+
+			//add location
+			s = input.substring(0, 5) + s;
+			s = s + " / " + numberOfValues;
+			
+			//put it in the correct cell
+			Equation e = new Equation(s);
+			cells[inputLocation[0]][inputLocation[1]] = new Cell(e);
+			return;
+			
+	}
+
+	public static boolean valueCheck(String input){
+		int start[] = Equation.parseLocation(input.substring(9, 11));
+		int end[] = Equation.parseLocation(input.substring(14, 16));
+		//check that all values in range are double
+		for(int col = start[0]; col <= end[0]; col ++){
+			for(int row = start[1]; row <= end[1]; row ++){
+				if(!Equation.isNumber(input)){
+					System.out.println("%%%%%%%%%%%%%%%%%%");
+
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
 }

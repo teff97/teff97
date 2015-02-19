@@ -2,6 +2,116 @@
 public class CodeToSave {
 
 	/*
+		
+		
+		
+		
+		
+		
+		
+		if(equationParts[0][0] != 999999999 && equationParts[1][0] != 999999999){
+			if(operation[0] == '+'){
+				ans = cells[equationParts[0][0]][equationParts[0][1]].doubleNumSave + cells[equationParts[1][0]][equationParts[1][1]].doubleNumSave;
+			}else if(operation[0] == '-'){
+				ans = cells[equationParts[0][0]][equationParts[0][1]].doubleNumSave - cells[equationParts[1][0]][equationParts[1][1]].doubleNumSave;
+			}else if(operation[0] == '*'){
+				ans = cells[equationParts[0][0]][equationParts[0][1]].doubleNumSave * cells[equationParts[1][0]][equationParts[1][1]].doubleNumSave;
+			}else if(operation[0] == '/'){
+				ans = cells[equationParts[0][0]][equationParts[0][1]].doubleNumSave / cells[equationParts[1][0]][equationParts[1][1]].doubleNumSave;
+			}else{
+				return 0.0;
+			}
+		}else if(equationParts[0][0] != 999999999 && equationParts[1][0] == 999999999){
+			ans = locationAndNum(cells[equationParts[0][0]][equationParts[0][1]], equationParts[1], operation[0]);
+		}else if(equationParts[0][0] == 999999999 && equationParts[1][0] != 999999999){
+			ans = locationAndNum(cells[equationParts[1][0]][equationParts[1][1]], equationParts[0], operation[0]);
+		}else if(equationParts[0][0] == 999999999 && equationParts[1][0] == 999999999){
+			if(operation[0] == '+'){
+				ans = equationParts[0][1] + equationParts[1][1];
+			}else if(operation[0] == '-'){
+				ans = equationParts[0][1] + equationParts[1][1];
+			}else if(operation[0] == '*'){
+				ans = equationParts[0][1] + equationParts[1][1];
+			}else if(operation[0] == '/'){
+				ans = equationParts[0][1] + equationParts[1][1];
+			}else{
+				return 0.0;
+			}
+		}
+			for(int idx = 1; idx < operation.length; idx++){
+				if(equationParts[idx+1][0] != 999999999){
+					if(operation[idx] == '+'){
+						ans = ans + cells[equationParts[idx+1][0]][equationParts[idx+1][1]].doubleNumSave;
+					}else if(operation[idx] == '-'){
+						ans = ans - cells[equationParts[idx+1][0]][equationParts[idx+1][1]].doubleNumSave;
+					}else if(operation[idx] == '*'){
+						ans = ans * cells[equationParts[idx+1][0]][equationParts[idx+1][1]].doubleNumSave;
+					}else if(operation[idx] == '/'){
+						ans = ans / cells[equationParts[idx+1][0]][equationParts[idx+1][1]].doubleNumSave;
+					}else{
+						return 0.0;
+					}
+				}else if(equationParts[idx+1][0] == 999999999){
+					if(operation[idx] == '+'){
+						ans = ans + equationParts[idx+1][1];
+					}else if(operation[idx] == '-'){
+						ans = ans - equationParts[idx+1][1];
+					}else if(operation[idx] == '*'){
+						ans = ans * equationParts[idx+1][1];
+					}else if(operation[idx] == '/'){
+						ans = ans / equationParts[idx+1][1];
+					}else{
+						return 0.0;
+					}
+				}else if(equationParts[0][0] == 999999999 && equationParts[1][0] == 999999999){
+					if(operation[0] == '+'){
+						ans = equationParts[idx+1][1] + equationParts[idx+1][1];
+					}else if(operation[0] == '-'){
+						ans = equationParts[idx+1][1] + equationParts[idx+1][1];
+					}else if(operation[0] == '*'){
+						ans = equationParts[idx+1][1] + equationParts[idx+1][1];
+					}else if(operation[0] == '/'){
+						ans = equationParts[idx+1][1] + equationParts[idx+1][1];
+					}else{
+						return 0.0;
+					}
+				}
+			}
+			
+	 * String inputArray[] = input.split(" ");
+		if(isLocation(inputArray[2]) && isLocation(inputArray[4])){
+			Equation e = new Equation(input);
+			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumSave = e.evaluate(cells);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint = e.evaluate(cells);
+			//System.out.println(cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint);
+		}else if(!isLocation(inputArray[2]) && !isLocation(inputArray[4])){
+			parseLocation(inputArray[0]);
+			char operation = inputArray[3].charAt(0);
+			double ans = 0.0;
+			if(operation == '+'){
+				ans = Double.parseDouble(inputArray[2]) + Double.parseDouble(inputArray[4]);
+			}else if(operation == '-'){
+				ans = Double.parseDouble(inputArray[2]) - Double.parseDouble(inputArray[4]);
+			}else if(operation == '*'){
+				ans = Double.parseDouble(inputArray[2]) * Double.parseDouble(inputArray[4]);
+			}else if(operation == '/'){
+				ans = Double.parseDouble(inputArray[2]) / Double.parseDouble(inputArray[4]);
+			}
+			cells [inputLocation[0]][inputLocation[1]] = new Cell(ans);
+		}else if(isLocation(inputArray[2]) && !isLocation(inputArray[4])){
+			Equation e = new Equation(input);
+			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumSave = e.evaluate(cells);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint = e.evaluate(cells);
+		}else if(!isLocation(inputArray[2]) && isLocation(inputArray[4])){
+			Equation e = new Equation(input);
+			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumSave = e.evaluate(cells);
+			cells [e.storeLocation[0]][e.storeLocation[1]].doubleNumPrint = e.evaluate(cells);
+		}
+		
+		
 	 * if(inputArray[2].charAt(0) < 47 && inputArray[2].charAt(0) > 58 && inputArray[4].charAt(0) < 47 && inputArray[4].charAt(0) > 58){
 			Equation e = new Equation(input);
 			cells [e.storeLocation[0]][e.storeLocation[1]] = new Cell(e);
