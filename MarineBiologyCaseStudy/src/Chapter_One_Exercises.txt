@@ -1,0 +1,54 @@
+Chapter One Exercises
+Exercise Set 1:
+1. Complete (yes/no)? Yes
+2. No the place that the fish move to is different but each time it moves it seems to operate off some rules.
+
+Analysis Question Set 1:
+1.The body of waster is represented by the bounded environment, which is blue. The lines represent the locations in the body of water.
+2. They can be at any position that is not occupied by another fish.
+3. No they each face their own direction which does not affect where they go.
+4. It moves every time one space either north south east or west except for backwards. It moves randomly.
+
+Exercise Set 2:
+1.	Timestep	Fish's location		Fish's Direction	Did it move?	In what direction?	New location	New direction
+	1			(3, 2)				North				Yes				North				(2, 2)			North
+	2			2, 2				North				Yes				West				2, 1			West
+	3			2, 1 				West				Yes				North				1, 1			North	
+	4			1, 1				North				Yes				West				1, 0			West
+	5			1, 0 				West				Yes				South				2, 0			South
+The fish woves in a random way either forward left or right but never backwards.
+
+2.No we have different results. I can not confirm if there are rules that the fish follow or weather they are truely random and have not broken the rules that I have come up with.
+
+Analysis Question Set 2:
+1.Five step are not enough data to find a pattern but my classmates also noticed that the fish never moved backwards
+2.	Timestep	Fish's location		Fish's Direction	Did it move?	In what direction?	New location	New direction
+	1			3, 2				North				Yes				North				2, 2			North	
+	2			2, 2 				North				Yes				East				2, 3			East	
+	3			2, 3 				East				Yes				South				3, 3 			South
+	4			3, 3				South				Yes				East				3, 4			East
+	5			3, 4 				East				Yes				South				4, 4			South
+	6			4, 4				South				Yes 			South				5, 4			South
+	7			5, 4 				South				Yes				South				6, 4			South
+	8			6, 4				South				Yes				West				6, 3			West
+	9			6, 3				West				Yes				North				5, 3			North	
+	10			5, 3 				North				Yes				North				4, 3			North
+	11			4, 3 				North				Yes				West				4, 2			West
+	12			4, 2 				West				Yes				South				5, 2			South
+	13			5, 2				South				Yes				South				6, 2			South
+	14			6, 2				South				Yes				West				6, 1			West
+	15			6, 1				West				Yes				West				6, 0 			West
+	16			6, 0 				West				Yes				North				5, 0 			North
+	17			5, 0				North				Yes				North				4, 0			North	
+	18			4, 0				North				Yes				East				4, 1			East
+	19			4, 1				East				Yes				East				4, 2			East
+	20			4, 2				East				Yes				North				3, 2			North
+
+Analysis Question Set 3:
+1.The environment is numbered like an array where the first location is 0, 0 and the last location is 6, 4
+
+Exercise Set 3:
+1.Yes the Location of the fish in other programs are generally organized in a line of fish depending on the size of the program. 
+2.When I fill up the entire graph except for one space then only one fish moves and all the other ones stay still
+
+UOPLOAD THE DATA FILE THAT YOU MAKE FOR THE LAST PROBLEM TO YOUR GIT REPOSITORY.
