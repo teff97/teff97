@@ -19,38 +19,39 @@ public class textExel {
 		String input = "";
 		
 		do{
-		printArray();
-		System.out.println("What do you want to do?");
-		input = scan.nextLine();
-		
-		if(input.equalsIgnoreCase("quit")){
-		}else if(input.equalsIgnoreCase("clear")){
-			clearAll();
-		}else if(ifClear(input)){
-			clear(input);
-		}else if(ifExport(input)){
-			export(input);
-		}else if(ifImport(input)){
-			importFile(input);
-		}else if(ifSorta(input)){
-			sortAscending(input);
-		}else if(ifSortd(input)){
-			sortDescending(input);
-		}else if(ifSUM(input)){
-			SUM(input);
-		}else if(ifAVG(input)){
-			AVG(input);
-		}else if(ifEquation(input)){
-			Equation(input);
-		}else if(ifEquationPrint(input)){
-			EquationPrint(input);
-		}else{
-			try{
-			parseInput(input);
-			}catch(ArrayIndexOutOfBoundsException e){
-				System.out.println("Wrong input");
-			}
-		}
+			
+				printArray();
+				System.out.println("What do you want to do?");
+				input = scan.nextLine();
+				
+				if(input.equalsIgnoreCase("quit")){
+				}else if(input.equalsIgnoreCase("clear")){
+					clearAll();
+				}else if(ifClear(input)){
+					clear(input);
+				}else if(ifExport(input)){
+					export(input);
+				}else if(ifImport(input)){
+					importFile(input);
+				}else if(ifSorta(input)){
+					sortAscending(input);
+				}else if(ifSortd(input)){
+					sortDescending(input);
+				}else if(ifSUM(input)){
+					SUM(input);
+				}else if(ifAVG(input)){
+					AVG(input);
+				}else if(ifEquation(input)){
+					Equation(input);
+				}else if(ifEquationPrint(input)){
+					EquationPrint(input);
+				}else{
+					try{
+					parseInput(input);
+					}catch(ArrayIndexOutOfBoundsException e){
+						System.out.println("Wrong input");
+					}
+				}
 		
 		}while(!input.equalsIgnoreCase("quit"));
 		
@@ -560,7 +561,6 @@ public class textExel {
 	public static boolean ifEquation(String input){
 		String inputArray[] = input.split(" ");
 		if(inputArray.length < 5){
-			//System.out.println("false1");
 			return false;
 		}
 	
