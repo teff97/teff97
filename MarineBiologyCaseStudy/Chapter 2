@@ -1,0 +1,44 @@
+1. The step method goes through an array of the fish that are in the environment and tells each one to act. Fish class passes to the environment class which passes to the simulation class so it can be used in all of those classes.
+2. Demo 1 does not use the simulation object while demo 2 does not use a simulation object.
+
+3. It returns a list of all of the location that are around the location (7,3). it will return: 
+	(7, 2)
+	(7, 4)
+	(6, 3)
+	(8, 3)
+4. direction 1 should be in the east direction which is from location 1 to location 2.
+5. direction 2 is just rotated 90 degrees to the right so the value would be south, and direction 3 is the opposite of direction 2 so it is North.
+6. The value should return the closest neighbor of location1 in direction 3's direction which is (6, 3).
+7. The value should return the closest neighbor of new location (5, 2) in direction 1's direction which is (5, 3).
+8. The documentation has four more constants: NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST. the documentation also has a constructor that allows the user to input the degrees that the fish is facing. The other methods that the Direction class has are
+inDegrees()
+toRight(int degrees)
+toLeft(int degrees)
+toString()
+randomDirection()
+FULL_CIRCLE
+hashCode()
+roundedDir(int numDirections, Directions startingDir)
+
+for location class:
+ compareTo(object other)
+ toString()
+ hashCode()
+ 
+I would use the toString methods when I wanted to know the location of the fish or which way it is facing, like when I hover my mouse over a location in the environment.The additional methods in Direction change the direction to the right or to the left
+
+Exercises set 1
+1. look in my Driver Class to see my tests.
+
+
+2. The degrees that go with each direction
+North: 0
+South: 180
+East: 90
+West: 270
+NorthEast: 45
+NorthWest: 315
+SouthEast: 135
+SouthWest: 225
+
+dir3 is North or 0 degrees.
