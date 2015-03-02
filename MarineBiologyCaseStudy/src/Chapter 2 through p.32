@@ -1,0 +1,18 @@
+Chapter 2 through page 32
+
+Analysis Questions set 3:
+1. There are only two objects because the locations are not objects but the fish are.
+
+2. It should return an array containing objects f1 and f2.
+
+3. The return value should be false because there is a fish at loc1.
+
+4. The return value should be true because there is not a fish at loc3.
+
+5. The return value should be f2 because there is a fish at loc2.
+
+6. The return value should be null because there is not a fish at loc3.
+
+7. Yes because the use can add fish to the program mid-simulation.
+
+8. 
