@@ -13,6 +13,12 @@ Analysis Questions set 3:
 
 6. The return value should be null because there is not a fish at loc3.
 
-7. Yes because the use can add fish to the program mid-simulation.
+7. No because when you initialize a fish it already has a location so when you add to the environment there is already a fish there.
 
-8. 
+8. The programmer wants the code to use the constructor not method, and each constructor is slightly different so they have a common method that each one calls.
+
+9. Yes, except that then there would be only one environment running at a time.
+
+Exercise set 2:
+3. The program throws an error saying that there is already something there. When the fish is initialized it is initialized to a location in the environment so when the fish is added to the environment using the env.add() method it thinks that the fish is already there.
+
