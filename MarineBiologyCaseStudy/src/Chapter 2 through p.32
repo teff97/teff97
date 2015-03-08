@@ -22,3 +22,34 @@ Analysis Questions set 3:
 Exercise set 2:
 3. The program throws an error saying that there is already something there. When the fish is initialized it is initialized to a location in the environment so when the fish is added to the environment using the env.add() method it thinks that the fish is already there.
 
+Analysis Questions set 4:
+1. When a fish is initialized it is in a consistent state. The fish is always initialized to an environment.
+
+2. The getNeighbor of the Environment interface returns a location in the direction that it is told regardless of if it is valid or not so the program could move a fish in that direction even if it is not valid.
+
+Analysis Questions set 5:
+1. loc1 == loc1 would return true. loc1.equals(loc1) would also return true.
+
+2. loc1 == loc2 would return false. loc1.equals(loc2) would also return false.
+
+3. loc1 == loc3 would return true. loc1.equals(loc3) would also return true.
+
+Analysis Questions set 6:
+1. The fish class needs a emptyNeighbors class because the fish needs to know which direction it can move and it can't move in any direction has a fish already. If the getNeigbors is use the program would try to move the fish to a location that is next to it but there could already be a fish there.
+
+Exercise set 3:
+2. 
+[(0, 1), (1, 0)]
+[(0, 2), (1, 1), (0, 0)]
+[(0, 1), (1, 2), (2, 1), (1, 0)]
+
+3. The four corners of the environment have two neighbors. Then each location that is along the edge of the environment each have three location that are neighbors. Then all of the other location in the environment have four.
+
+
+
+
+
+
+
+
+

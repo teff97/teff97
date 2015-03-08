@@ -12,6 +12,7 @@ public class simpleDriver {
         Location loc1 = new Location(7, 3);
         Location loc2 = new Location(2, 6);
         Location loc3 = new Location(4, 8);
+        Location loc4 = new Location(7, 3);
         Fish f1 = new Fish(env, loc1);
         Fish f2 = new Fish(env, loc2);
         
@@ -31,7 +32,7 @@ public class simpleDriver {
         
         System.out.println("env.numObjects() " + env.numObjects());
         Locatable allObjects2 [] = env.allObjects();
-        for(int idx = 0; idx < allObjects.length; idx++){
+        for(int idx = 0; idx < allObjects2.length; idx++){
         	System.out.println("Object " + allObjects2[idx]);
         }
         
@@ -40,9 +41,13 @@ public class simpleDriver {
         
         System.out.println("env.numObjects() " + env.numObjects());
         Locatable allObjects3 [] = env.allObjects();
-        for(int idx = 0; idx < allObjects.length; idx++){
+        for(int idx = 0; idx < allObjects3.length; idx++){
         	System.out.println("Object " + allObjects3[idx]);
         }
+        
+        System.out.println("(0, 0)" + env.neighborsOf(new Location(0, 0)));
+        System.out.println("(0, 1)" + env.neighborsOf(new Location(0, 1)));
+        System.out.println("(1, 1)" + env.neighborsOf(new Location(1, 1)));
         
         Fish f5 = new Fish(env, new Location(1, 2));
         
