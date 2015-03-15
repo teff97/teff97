@@ -52,9 +52,10 @@ public class SimpleMBSDemo2
         // Construct an empty environment and several fish in the context
         // of that environment.
         BoundedEnv env = new BoundedEnv(ENV_ROWS, ENV_COLS);
-        Fish f1 = new Fish(env, new Location(2, 2));
-        Fish f2 = new Fish(env, new Location(2, 3));
-        Fish f3 = new Fish(env, new Location(5, 8));
+        Direction d1 = new Direction("north");
+        Fish f1 = new Fish(env, new Location(2, 2), d1, Fish.changeColor("blue"));
+        Fish f2 = new Fish(env, new Location(2, 3), d1, Fish.changeColor("blue"));
+        Fish f3 = new Fish(env, new Location(5, 8), d1, Fish.changeColor("blue"));
 
         // Construct an object that knows how to draw the environment with
         // a delay.
@@ -67,6 +68,11 @@ public class SimpleMBSDemo2
         // Run the simulation for the specified number of steps.
         for ( int i = 0; i < NUM_STEPS; i++ )
         {
+        	if(i % 2 == 1){
+        		f3.myColor = Fish.changeColor("red");
+        	}else{
+        		f3.myColor = Fish.changeColor("green");
+        	}
             sim.step();
         }
     }

@@ -45,7 +45,7 @@ public class Fish implements Locatable
     private int myId;                  // unique ID for this fish
     private Location myLoc;            // fish's location
     private Direction myDir;           // fish's direction
-    private Color myColor;             // fish's color
+    public Color myColor;             // fish's color
 
 
   // constructors and related helper methods
@@ -125,6 +125,17 @@ public class Fish implements Locatable
     }
 
 
+    public static Color changeColor(String name){
+    	if(name.equalsIgnoreCase("red")){
+    		return new Color(255, 0, 0);
+    	}else if(name.equalsIgnoreCase("green")){
+    		return new Color(0, 255, 0);
+    	}else if(name.equalsIgnoreCase("blue")){
+    		return new Color(0, 0, 255);
+    	}else{
+    		return new Color(0, 0, 0);
+    	}
+    }
   // accessor methods
 
     /** Returns this fish's ID.

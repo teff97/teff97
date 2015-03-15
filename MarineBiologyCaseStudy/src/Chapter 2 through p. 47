@@ -1,0 +1,66 @@
+Chris Barth
+
+Analysis Question Set 7
+1. 	all environments would return 3
+	
+2. 	env 1 would return 0
+	env 2 would return 1
+	env 3 would return 2
+	env 4 would return 3
+	
+3. 	env 1 would have no next location
+	env 2 would go to the east one location
+	env 3 would go to the east or south one location
+	env 4 would go to the east or south or north one location
+
+Analysis Question Set 8
+1. If the fish is at position 2, 2 then emptyNeighbors will return three location that do not have anything in them. The oppositeDirection would be South if the fish is facing North and so on for each direction.
+
+2.  I would need to add a field for each instance called age, then would need to have a method that would increase the fishes age at the right time, which might be after more than one move.
+
+Exercise Set 4
+Check the fish class and SimpleMBSDemo2 class for completion
+
+Analysis Question Set 9
+1. An easy thing to test would be to create an environment but not put any fish into the environment. We would expect this to run without an error and just do nothing.
+
+2. 	We need a test where it does not enter the loop, so an environment of 1 by 1 would have no neighbors
+	We also need to test when there are multiple empty locations next to the fish
+	We also need to test when there is at least one location that is next to the fish that is not empty
+	
+3. construct a 1 by 2 environment with a fish facing the only open square.
+
+Exercise Set 5
+1. Each time the fish runs it is the same thing that happens with each fish
+
+2. it tells me what objects are in the environment and where they are
+
+3. 	They all moved to an open location that was not backwards
+	when one fish only had one open square it moved to it
+	when two fish were next to each other they did not move to the same square
+	
+4. - 5. It seems to read the fish across the environment and then print them in that order
+
+6. Make the environment only a 1 by 1 grid and/or don't put any fish in the environment
+
+7. 	To test the move method I would have to test if the fish has only one open location in each direction, one at a time. This would limit the fish to one direction that it could go and if that worked then the fish could go in any direction if it had more than one open location
+	to test the next location method there would have to be more than one open spot and I would have to run the simulation multiple times to see if it randomly selects a new place to go
+	to test the empty Neighbors method I would need to limit the fish to one open square using fish on either side.
+
+Analysis Question Set 10
+1. The simulation is passed the display and the environment which means that the environment is keeping track of all of the different objects that are in the environment rather than the simulation class. However the simulation class calls the fishes act method so the fish only has to know how to act.
+
+2. The simulation class could keep track of the fish as well as the environment and then ask the environment to move the fish.
+	IN SIMULATION:
+	public step(Environment) // calls the environment method to step through for all fish in Environment
+	public fishLocation //where is the fish and where did it move
+	
+	IN ENVIRONMENT
+	public static step(Environment) // move every fish in the environment
+	
+3. It makes sense the way that it was created because having the environment should know which objects it contains while the fish class should be the one to know how to move. Also the simulation class just tells the fish to move and the environment that it moved.
+
+4. Having the environment in charge of the movement of the object is bad because the environment would have to know how to move each type of object it can hold which is a lot of methods and if-statements. Also the Simulation should not have to ask for each individual fish because there could be hundreds of fish to pass to the method.
+
+5.  Well the Environment interface and simulation classes can be reused because they call the object's method, so all that would have to be changed would be the name of the method.
+	The classes that can not be reused are the fish and demosimutaltions because those use special objects.
