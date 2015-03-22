@@ -32,6 +32,8 @@
  *  @version 1 July 2002
  **/
 
+import java.awt.Color;
+
 public class SimpleMBSDemo2
 {
     // Specify number of rows and columns in environment.
@@ -53,9 +55,15 @@ public class SimpleMBSDemo2
         // of that environment.
         BoundedEnv env = new BoundedEnv(ENV_ROWS, ENV_COLS);
         Direction d1 = new Direction("north");
-        Fish f1 = new Fish(env, new Location(2, 2), d1, Fish.changeColor("blue"));
-        Fish f2 = new Fish(env, new Location(2, 3), d1, Fish.changeColor("blue"));
-        Fish f3 = new Fish(env, new Location(5, 8), d1, Fish.changeColor("blue"));
+        Color c1 = new Color(255, 255, 255);
+        Color c2 = new Color(0, 255, 255);
+        Color c3 = new Color(255, 0, 255);
+        Color c4 = new Color(255, 255, 0);
+        
+        Fish f1 = new Fish(env, new Location(2, 2), d1, c1);
+        Fish f2 = new Fish(env, new Location(2, 3), d1, c2);
+        Fish f3 = new Fish(env, new Location(5, 8), d1, c3);
+        Fish f4 = new Fish(env, new Location(3, 8), d1, c4);
 
         // Construct an object that knows how to draw the environment with
         // a delay.
@@ -68,11 +76,6 @@ public class SimpleMBSDemo2
         // Run the simulation for the specified number of steps.
         for ( int i = 0; i < NUM_STEPS; i++ )
         {
-        	if(i % 2 == 1){
-        		f3.myColor = Fish.changeColor("red");
-        	}else{
-        		f3.myColor = Fish.changeColor("green");
-        	}
             sim.step();
         }
     }

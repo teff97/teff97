@@ -1,0 +1,22 @@
+Analysis Question Set 1
+1. No the Driver class has a reference to the fish because it must be able to tell the fish what to do, or the simulation class must have a reference to move the fish.
+
+2. The advantage is if there are multiple fish in the environment then the printed statement would allow the user to see and record which fish move where in a quantitative way. The disadvantage is if there are a lot of fish then there might be too much data to sort through.
+
+Analysis Question Set 2
+1. Yes they should be different because the methods are completely different. This way the methods can be used by other classes if fish needed to be added or removed mid-program. Also I do not know a way to combine the two methods so this is the only way that I could do it.
+
+2. I think that they have redundant code that could be shortened. If in the act method there was a test to see if there were any empty locations then they would not have to test for it latter and could just skip both the breed and move methods. The test for if the die method should be called should stay in the  act method because if the fish isn't going to die the code in the die method should be skipped.
+
+3. They way that is listed in the question has the advantage of having a variable that can be reused to do something else. if the die method was only called if the breed method was called then having the boolean Bred would allow the program to test if the fish bred. However the program right now is not using this variable in that way so it is useless and redundant. 
+
+Exercise set 1
+2. When comparing the four different saves I noticed that after five time steps the fish in chapter 2 had moved to a new location while the chapter 3 fish were deleted until there was only one left, but after 5 more steps the fish bred into 14 new fish. So the fish movements are not the same.
+
+3. With random colors it is easier to see that new fish are being created.
+
+5. Since all fish had a high chance of death and a lower chance of breeding all of the fish died except the fish that had a zero chance of death
+
+6. the maximum number of times a fish breeds was 2 and the minimum was 0. Yes these values are what I expect because the probability of death is so high.
+
+7. the maximum age of a fish was 12 and the minimum was 2. Yes since I started the counter at the top of the act method if the fish was going to die then the counter would already be at 2.
